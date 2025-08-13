@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNPトレカ交流会 in 名古屋</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #f8f6f3 0%, #fff8f0 50%, #f0f8ff 100%);
+            color: #2c2c2c;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Image Placeholder Styles */
+        .image-placeholder {
+            background: rgba(255, 182, 193, 0.1);
+            border: 2px dashed #e91e63;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c62828;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-placeholder:hover {
+            background: rgba(255, 154, 158, 0.2);
+            border-color: #388e3c;
+            color: #2e7d32;
+        }
+
+        .placeholder-text {
+            padding: 20px;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 182, 193, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .main-logo {
+            max-width: 600px;
+            width: 100%;
+            height: 400px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .event-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #81c784);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .event-subtitle {
+            font-size: 1.2rem;
+            color: #4e342e;
+            margin-bottom: 30px;
+        }
+
+        /* Event Info Section */
+        .event-info {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.2);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 182, 193, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.1);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+        }
+
+        .info-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .info-label {
+            font-size: 1.1rem;
+            color: #c62828;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .info-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3e2723;
+        }
+
+        .free-badge {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: #3e2723;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Character Sections */
+        .character-section {
+            display: flex;
+            align-items: center;
+            margin: 60px 0;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .character-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .character-image {
+            flex: 0 0 250px;
+            text-align: center;
+        }
+
+        .character-image .image-placeholder {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+        .character-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #1b5e20, #2e7d32);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #3e2723;
+        }
+
+        .highlight-text {
+            color: #c62828;
+            font-weight: bold;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1) 0%, rgba(129, 199, 132, 0.1) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 182, 193, 0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff9a9e, #81c784);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 154, 158, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 154, 158, 0.6);
+        }
+
+        .official-link {
+            display: inline-block;
+            color: #81c784;
+            text-decoration: none;
+            padding: 15px 30px;
+            border: 2px solid #81c784;
+            border-radius: 25px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .official-link:hover {
+            background: #81c784;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Details Section */
+        .details-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 4px solid #ffd93d;
+        }
+
+        .detail-title {
+            font-size: 1.3rem;
+            color: #ffd93d;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .detail-text {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 182, 193, 0.3);
+            margin-top: 60px;
+        }
+
+        .footer-text {
+            color: #4e342e;
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .event-title {
+                font-size: 2rem;
+            }
+
+            .character-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .character-section.reverse {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 1.3rem;
+            }
+
+            .character-image .image-placeholder {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* Sparkle Animation */
+        .sparkle {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sparkle::before {
+            content: '✨';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            font-size: 1.5rem;
+            animation: sparkle1 3s ease-in-out infinite;
+        }
+
+        .sparkle::after {
+            content: '⭐';
+            position: absolute;
+            top: 20%;
+            right: 15%;
+            font-size: 1.2rem;
+            animation: sparkle2 4s ease-in-out infinite;
+        }
+
+        @keyframes sparkle1 {
+            0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        @keyframes sparkle2 {
+            0%, 100% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(-180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header sparkle">
+            <div class="main-logo image-placeholder">
+                <div class="placeholder-text">
+                    📸 メイン画像（Image 4）<br>
+                    CNPトレカ交流会 in 名古屋<br>
+                    ポスター画像を配置
+                </div>
+            </div>
+            <h1 class="event-title">CNPトレカ交流会 in 名古屋</h1>
+            <p class="event-subtitle">ゆるく、楽しく、そしてちょっとアツく！</p>
+        </header>
+
+        <!-- Event Info -->
+        <section class="event-info">
+            <div class="info-grid">
+                <div class="info-card">
+                    <span class="info-icon">📅</span>
+                    <div class="info-label">開催日時</div>
+                    <div class="info-value">9月14日（日）<br>13:30〜16:30</div>
+                </div>
+                <div class="info-card">
+                    <span class="info-icon">📍</span>
+                    <div class="info-label">会場</div>
+                    <div class="info-value">名古屋会議室<br>名古屋伏見駅前店<br>第6会議室</div>
+                </div>
+                <div class="info-card">
+                    <span class="info-icon">💰</span>
+                    <div class="info-label">参加費</div>
+                    <div class="info-value">
+                        <span class="free-badge">無料！</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <span class="info-icon">👥</span>
+                    <div class="info-label">定員</div>
+                    <div class="info-value">16名<br>（先着順）</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Welcome Section -->
+        <section class="character-section">
+            <div class="character-image">
+                <div class="image-placeholder">
+                    <div class="placeholder-text">
+                        🎉 Image 1<br>
+                        お祝いキャラクター<br>
+                        配置予定
+                    </div>
+                </div>
+            </div>
+            <div class="character-content">
+                <h2 class="section-title">初心者大歓迎！</h2>
+                <p class="section-text">
+                    <span class="highlight-text">「気になってるけど遊んだことない」</span><br>
+                    <span class="highlight-text">「やってみたいけどルールが不安…」</span><br><br>
+                    そんな方こそ大歓迎です！<br>
+                    初心者向けのスターターデッキや、ちょっとしたプレゼントもご用意しています。<br>
+                    CNPトレカを一緒に楽しみましょう！
+                </p>
+            </div>
+        </section>
+
+        <!-- Fun Section -->
+        <section class="character-section reverse">
+            <div class="character-image">
+                <div class="image-placeholder">
+                    <div class="placeholder-text">
+                        🎮 Image 2<br>
+                        HOP, STEP, JUMP!<br>
+                        楽しいキャラクター
+                    </div>
+                </div>
+            </div>
+            <div class="character-content">
+                <h2 class="section-title">楽しい交流の場</h2>
+                <p class="section-text">
+                    CNPトレカを通じて新しい仲間と出会える交流会です。<br>
+                    初心者からベテランまで、みんなでワイワイ楽しみましょう！<br><br>
+                    ゲームのコツやデッキ構築のアドバイスなど、<br>
+                    経験豊富な参加者から学べるチャンスもたくさんあります。
+                </p>
+            </div>
+        </section>
+
+        <!-- Fighting Spirit Section -->
+        <section class="character-section">
+            <div class="character-image">
+                <div class="image-placeholder">
+                    <div class="placeholder-text">
+                        🚩 Image 3<br>
+                        FIGHT!の旗<br>
+                        応援キャラクター
+                    </div>
+                </div>
+            </div>
+            <div class="character-content">
+                <h2 class="section-title">熱いバトルを楽しもう！</h2>
+                <p class="section-text">
+                    <span class="highlight-text">ちょっとアツく！</span><br><br>
+                    フレンドリーな雰囲気の中でも、真剣勝負のバトルが楽しめます。<br>
+                    CNPキャラクターたちと一緒に、白熱したゲームを体験してください！<br><br>
+                    勝敗よりも、みんなで楽しむことが一番大切です。
+                </p>
+            </div>
+        </section>
+
+        <!-- Details Section -->
+        <section class="details-section">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">イベント詳細</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-title">🎁 特典</div>
+                    <div style="font-size: 1.1rem; color: #1b5e20;">
+                        初心者向けスターターデッキ<br>
+                        ちょっとしたプレゼント<br>
+                        ※数に限りがあります
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-title">🚃 アクセス・会場案内</div>
+                    <div style="font-size: 1.1rem; color: #1b5e20;">
+                        地下鉄東山線・鶴舞線「伏見駅」<br>
+                        4番出口より徒歩1分<br>
+                        名古屋会議室 名古屋伏見駅前店<br><br>
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.5989899999997!2d136.90399!3d35.168611!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600370d1b8b8b8b8%3A0x123456789abcdef!2z5ZCN5Y-k5bGL5Lya6K2w5a6kIOWQjeWPpOWxi-S8j-imi-mnheepreW6lw!5e0!3m2!1sja!2sjp!4v1234567890123!5m2!1sja!2sjp" 
+                            width="100%" 
+                            height="200" 
+                            style="border:0; border-radius: 10px; margin-top: 10px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-title">📋 持ち物</div>
+                    <div style="font-size: 1.1rem; color: #1b5e20;">
+                        CNPトレカのデッキをお持ちください<br>
+                        デッキをお持ちでない方も大歓迎！<br>
+                        初心者向けデッキをご用意しています
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-title">⚠️ 注意事項</div>
+                    <div style="font-size: 1.1rem; color: #1b5e20;">
+                        定員16名（先着順）<br>
+                        お早めにお申し込みください<br>
+                        キャンセルの場合はご連絡をお願いします
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Image Section -->
+        <section style="text-align: center; margin: 60px 0;">
+            <div class="image-placeholder" style="max-width: 600px; height: 300px; margin: 0 auto;">
+                <div class="placeholder-text">
+                    🃏 Image 5<br>
+                    トレカで遊んでいる様子<br>
+                    ゲームプレイ画像
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="character-image" style="margin-bottom: 30px;">
+                <div class="image-placeholder" style="width: 150px; height: 150px; margin: 0 auto;">
+                    <div class="placeholder-text">
+                        😸 Image 6<br>
+                        マスコット<br>
+                        キャラクター
+                    </div>
+                </div>
+            </div>
+            <h2 class="section-title">お申し込み・お問い合わせ</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; color: #3e2723;">
+                参加をご希望の方は、下記のフォームからお申し込みください
+            </p>
+            <a href="https://t.co/HvqLfzBjNS" class="cta-button" target="_blank" rel="noopener">
+                📝 申し込みフォーム
+            </a>
+            <div style="margin-top: 30px; padding: 20px; background: rgba(255, 255, 255, 0.8); border-radius: 15px; border: 1px solid rgba(255, 182, 193, 0.3);">
+                <p style="color: #3e2723; font-size: 1.1rem; margin-bottom: 10px;"><strong>📞 お問い合わせ</strong></p>
+                <p style="color: #3e2723; font-size: 1rem;">
+                    ヒロ(HG)<br>
+                    X（旧Twitter）: @hsrk_g_hsrk
+                </p>
+            </div>
+        </section>
+
+        <!-- Official Info Section -->
+        <section style="text-align: center; margin: 40px 0; padding: 30px; background: rgba(255, 255, 255, 0.6); border-radius: 15px; border: 1px solid rgba(255, 182, 193, 0.2);">
+            <h3 style="color: #2e7d32; font-size: 1.5rem; margin-bottom: 20px;">CNPトレカについて</h3>
+            <p style="color: #3e2723; margin-bottom: 20px;">
+                このイベントは個人主催のファン交流会です。<br>
+                CNPトレカの詳細については公式サイトをご覧ください。
+            </p>
+            <a href="https://cnptcg.monolithos.co.jp/" class="official-link" target="_blank" rel="noopener">
+                🌐 CNPトレカ公式サイト
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">
+                CNPトレカ交流会 in 名古屋 | 2025年9月14日開催
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
